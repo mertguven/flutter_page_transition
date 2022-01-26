@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           case '/second':
             return PageTransition(
               child: SecondPage(),
-              type: PageTransitionType.fade,
+              type: PageTransitionType.bottomToTopJoined,
               settings: settings,
               reverseDuration: Duration(seconds: 3),
             );
@@ -132,6 +132,21 @@ class MyHomePage extends StatelessWidget {
                     child: SecondPage(),
                   ),
                 );
+              },
+            ),
+            ElevatedButton(
+              child: Text('Bottom to Top Second Joined'),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        alignment: Alignment.bottomCenter,
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 600),
+                        reverseDuration: Duration(milliseconds: 600),
+                        type: PageTransitionType.bottomToTopJoined,
+                        child: SecondPage(),
+                        childCurrent: this));
               },
             ),
             ElevatedButton(

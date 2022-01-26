@@ -72,7 +72,7 @@ class PageTransition<T> extends PageRouteBuilder<T> {
           settings: settings,
           maintainState: true,
           opaque: opaque,
-          fullscreenDialog: fullscreenDialog, 
+          fullscreenDialog: fullscreenDialog,
           transitionsBuilder: (BuildContext context,
               Animation<double> animation,
               Animation<double> secondaryAnimation,
@@ -127,6 +127,88 @@ class PageTransition<T> extends PageRouteBuilder<T> {
                     end: Offset.zero,
                   ).animate(animation),
                   child: child,
+                );
+                // ignore: dead_code
+                break;
+
+              /// PageTransitionType.bottomToTopJoined
+              case PageTransitionType.bottomToTopJoined:
+                assert(childCurrent != null, """
+                When using type "bottomToTopJoined" you need argument: 'childCurrent'
+
+                example:
+                  child: MyPage(),
+                  childCurrent: this
+
+                """);
+                return Stack(
+                  children: <Widget>[
+                    SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(0.0, 0.0),
+                        end: const Offset(0.0, -1.0),
+                      ).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: curve,
+                        ),
+                      ),
+                      child: childCurrent,
+                    ),
+                    SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(0.0, 1.0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: curve,
+                        ),
+                      ),
+                      child: child,
+                    )
+                  ],
+                );
+                // ignore: dead_code
+                break;
+
+              /// PageTransitionType.topToBottomJoined
+              case PageTransitionType.topToBottomJoined:
+                assert(childCurrent != null, """
+                When using type "topToBottomJoined" you need argument: 'childCurrent'
+
+                example:
+                  child: MyPage(),
+                  childCurrent: this
+
+                """);
+                return Stack(
+                  children: <Widget>[
+                    SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(0.0, 0.0),
+                        end: const Offset(0.0, 1.0),
+                      ).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: curve,
+                        ),
+                      ),
+                      child: childCurrent,
+                    ),
+                    SlideTransition(
+                      position: Tween<Offset>(
+                        begin: const Offset(0.0, -1.0),
+                        end: Offset.zero,
+                      ).animate(
+                        CurvedAnimation(
+                          parent: animation,
+                          curve: curve,
+                        ),
+                      ),
+                      child: child,
+                    )
+                  ],
                 );
                 // ignore: dead_code
                 break;

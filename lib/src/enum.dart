@@ -13,9 +13,17 @@ enum PageTransitionType {
 
   topToBottom,
 
+  /// Top to bottom slide as if joined
+
+  topToBottomJoined,
+
   /// bottom the top animation
 
   bottomToTop,
+
+  /// Bottom to top slide as if joined
+
+  bottomToTopJoined,
 
   /// scale animation
 
